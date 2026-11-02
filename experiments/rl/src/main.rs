@@ -214,7 +214,9 @@ mod tests {
             evaluate(&model, EVAL_SEED, false),
             evaluate(&restored, EVAL_SEED, false)
         );
-        let corrupt = fs::read_to_string(&path).unwrap().replacen("0,0,0", "0,NaN,0", 1);
+        let corrupt = fs::read_to_string(&path)
+            .unwrap()
+            .replacen("0,0,0", "0,NaN,0", 1);
         fs::write(&path, corrupt).unwrap();
         assert!(load(&path).is_err());
         fs::remove_file(path).unwrap();
